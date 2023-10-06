@@ -1,5 +1,6 @@
 import getPost from "@/services/getPost";
 import MarkdownPreview from "@/components/markdownPreview";
+import getPosts from "@/services/getPosts";
 
 const PostPage = (
         { params: { slug } }: { params: { slug: string } }
@@ -19,4 +20,11 @@ const PostPage = (
     );
 };
 
+export async function generateStaticParams() {
+    const posts = getPosts();
+
+    return posts.map(post => {
+        return {slug: post.slug};
+    })
+}
 export default PostPage;
